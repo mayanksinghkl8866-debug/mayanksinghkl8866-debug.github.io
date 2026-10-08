@@ -20,6 +20,7 @@
       background: linear-gradient(135deg, #16001c, #4a073d);
       color: white;
       text-align: center;
+      overflow-x: hidden;
     }
 
     section {
@@ -37,6 +38,7 @@
       border-radius: 30px;
       background: rgba(255, 255, 255, 0.08);
       box-shadow: 0 0 40px rgba(255, 80, 180, 0.25);
+      backdrop-filter: blur(10px);
     }
 
     .heart {
@@ -77,6 +79,12 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #ff1f8f;
     }
 
     .photos {
@@ -96,11 +104,39 @@
       align-items: center;
       justify-content: center;
       color: #ffcce5;
+      overflow: hidden;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     #finalMessage {
       display: none;
       margin-top: 30px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .falling-heart {
+      position: fixed;
+      top: -30px;
+      font-size: 24px;
+      z-index: 9999;
+      pointer-events: none;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(105vh) rotate(360deg);
+      }
     }
   </style>
 </head>
@@ -108,102 +144,73 @@
 <body>
 
   <!-- HOME -->
-  <section>
+  <section id="home">
     <div class="card">
-
       <div class="heart">❤️</div>
-
       <p>A little birthday surprise for</p>
-
       <h1>Yashika</h1>
-
       <p>
         Someone made this little corner of the internet
         especially for you. 🫶
       </p>
-
       <button onclick="goTo('letter')">
         Open Your Surprise 💌
       </button>
-
     </div>
   </section>
-
 
   <!-- LETTER -->
   <section id="letter">
     <div class="card">
-
       <h2>Hey Yashika ❤️</h2>
-
       <p>
         Happy Birthday to one of the most special people in my life. 🎂
       </p>
-
       <p>
         I hope this year brings you happiness, beautiful memories
         and everything you wish for.
       </p>
-
       <p>
         Every conversation, every laugh and every little moment
         with you means something to me.
       </p>
-
       <p>
         Today is your day, so smile a little extra. ❤️
       </p>
-
       <button onclick="goTo('story')">
         Our Story 🫶
       </button>
-
     </div>
   </section>
-
 
   <!-- STORY -->
   <section id="story">
     <div class="card">
-
       <p>CHAPTERS OF US</p>
-
       <h2>Our Little Story ❤️</h2>
-
       <p>🌸 It started with two people talking.</p>
-
       <p>💬 Random conversations became something special.</p>
-
       <p>😂 We laughed and made memories together.</p>
-
       <p>❤️ And somewhere along the way, we became "us".</p>
-
       <button onclick="goTo('memories')">
         Our Memories 📸
       </button>
-
     </div>
   </section>
-
 
   <!-- MEMORIES -->
   <section id="memories">
     <div class="card">
-
       <h2>Our Memories 📸</h2>
-
       <p>
         One day these spaces will hold our favourite pictures. ❤️
       </p>
 
       <div class="photos">
-
+        <!-- Replace text with <img src="URL" alt="Memory"> when ready -->
         <div class="photo">PHOTO 1</div>
-
         <div class="photo">PHOTO 2</div>
-
         <div class="photo">PHOTO 3</div>
-
       </div>
 
       <button onclick="showFinal()">
@@ -211,29 +218,15 @@
       </button>
 
       <div id="finalMessage">
-
         <h2>Yashika ❤️</h2>
-
-        <p>
-          You're officially stuck with this idiot. 😂
-        </p>
-
-        <p>
-          Happy Birthday! 🎂❤️
-        </p>
-
-        <p>
-          Keep smiling. You deserve all the happiness in the world. 🫶
-        </p>
-
+        <p>You're officially stuck with this idiot. 😂</p>
+        <p>Happy Birthday! 🎂❤️</p>
+        <p>Keep smiling. You deserve all the happiness in the world. 🫶</p>
       </div>
-
     </div>
   </section>
 
-
   <script>
-
     function goTo(sectionId) {
       document.getElementById(sectionId).scrollIntoView({
         behavior: "smooth"
@@ -241,39 +234,26 @@
     }
 
     function showFinal() {
+      const finalMsg = document.getElementById("finalMessage");
+      finalMsg.style.display = "block";
+      finalMsg.scrollIntoView({ behavior: "smooth" });
 
-      document.getElementById("finalMessage").style.display = "block";
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("div");
+          heart.classList.add("falling-heart");
+          heart.innerHTML = "❤️";
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.animationDuration = (2.5 + Math.random() * 1.5) + "s";
 
-      for (let i = 0; i < 25; i++) {
+          document.body.appendChild(heart);
 
-        const heart = document.createElement("div");
-
-        heart.innerHTML = "❤️";
-
-        heart.style.position = "fixed";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.top = "-30px";
-        heart.style.fontSize = "24px";
-        heart.style.zIndex = "9999";
-
-        document.body.appendChild(heart);
-
-        let position = -30;
-
-        const fall = setInterval(function() {
-
-          position += 5;
-          heart.style.top = position + "px";
-
-          if (position > window.innerHeight) {
-            clearInterval(fall);
+          setTimeout(() => {
             heart.remove();
-          }
-
-        }, 20);
+          }, 4000);
+        }, i * 100);
       }
     }
-
   </script>
 
 </body>
