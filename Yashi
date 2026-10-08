@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Yashika ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #16001c, #4a073d);
+      color: white;
+      text-align: center;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 700px;
+      padding: 40px 25px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 40px rgba(255, 80, 180, 0.25);
+    }
+
+    .heart {
+      font-size: 70px;
+      animation: beat 1s infinite;
+    }
+
+    @keyframes beat {
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    h1 {
+      font-size: 55px;
+      color: #ff9ed5;
+      margin: 15px 0;
+    }
+
+    h2 {
+      font-size: 35px;
+      color: #ff9ed5;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #ffe5f3;
+    }
+
+    button {
+      border: none;
+      border-radius: 30px;
+      padding: 15px 25px;
+      margin-top: 20px;
+      background: #ff3f9f;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .photos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .photo {
+      width: 150px;
+      height: 150px;
+      border: 2px dashed #ff9ed5;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffcce5;
+    }
+
+    #finalMessage {
+      display: none;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HOME -->
+  <section>
+    <div class="card">
+
+      <div class="heart">❤️</div>
+
+      <p>A little birthday surprise for</p>
+
+      <h1>Yashika</h1>
+
+      <p>
+        Someone made this little corner of the internet
+        especially for you. 🫶
+      </p>
+
+      <button onclick="goTo('letter')">
+        Open Your Surprise 💌
+      </button>
+
+    </div>
+  </section>
+
+
+  <!-- LETTER -->
+  <section id="letter">
+    <div class="card">
+
+      <h2>Hey Yashika ❤️</h2>
+
+      <p>
+        Happy Birthday to one of the most special people in my life. 🎂
+      </p>
+
+      <p>
+        I hope this year brings you happiness, beautiful memories
+        and everything you wish for.
+      </p>
+
+      <p>
+        Every conversation, every laugh and every little moment
+        with you means something to me.
+      </p>
+
+      <p>
+        Today is your day, so smile a little extra. ❤️
+      </p>
+
+      <button onclick="goTo('story')">
+        Our Story 🫶
+      </button>
+
+    </div>
+  </section>
+
+
+  <!-- STORY -->
+  <section id="story">
+    <div class="card">
+
+      <p>CHAPTERS OF US</p>
+
+      <h2>Our Little Story ❤️</h2>
+
+      <p>🌸 It started with two people talking.</p>
+
+      <p>💬 Random conversations became something special.</p>
+
+      <p>😂 We laughed and made memories together.</p>
+
+      <p>❤️ And somewhere along the way, we became "us".</p>
+
+      <button onclick="goTo('memories')">
+        Our Memories 📸
+      </button>
+
+    </div>
+  </section>
+
+
+  <!-- MEMORIES -->
+  <section id="memories">
+    <div class="card">
+
+      <h2>Our Memories 📸</h2>
+
+      <p>
+        One day these spaces will hold our favourite pictures. ❤️
+      </p>
+
+      <div class="photos">
+
+        <div class="photo">PHOTO 1</div>
+
+        <div class="photo">PHOTO 2</div>
+
+        <div class="photo">PHOTO 3</div>
+
+      </div>
+
+      <button onclick="showFinal()">
+        Final Surprise 👀❤️
+      </button>
+
+      <div id="finalMessage">
+
+        <h2>Yashika ❤️</h2>
+
+        <p>
+          You're officially stuck with this idiot. 😂
+        </p>
+
+        <p>
+          Happy Birthday! 🎂❤️
+        </p>
+
+        <p>
+          Keep smiling. You deserve all the happiness in the world. 🫶
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <script>
+
+    function goTo(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function showFinal() {
+
+      document.getElementById("finalMessage").style.display = "block";
+
+      for (let i = 0; i < 25; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.innerHTML = "❤️";
+
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "-30px";
+        heart.style.fontSize = "24px";
+        heart.style.zIndex = "9999";
+
+        document.body.appendChild(heart);
+
+        let position = -30;
+
+        const fall = setInterval(function() {
+
+          position += 5;
+          heart.style.top = position + "px";
+
+          if (position > window.innerHeight) {
+            clearInterval(fall);
+            heart.remove();
+          }
+
+        }, 20);
+      }
+    }
+
+  </script>
+
+</body>
+</html>
